@@ -1,7 +1,7 @@
 let items = [];
 
 document.getElementById("addItem").addEventListener("click", addItem);
-document.getElementById("itemInput").addEventListener("keypres", fuction(e){
+document.getElementById("itemInput").addEventListener("keypress", fuction(e){
     if(e.key === "Enter"){
     addItem()
     }
@@ -11,7 +11,7 @@ function addItem() {
     let input = document.getElementById("itemInput");
     let itemNme = input.ariaValueMax.trim().toLowerCase();
 
-  if (existingItem) {
+  if (itemName) {
     let existingItem = items.find((item) => item.name === itemName);
 
     if (existingItem) {
@@ -21,7 +21,7 @@ function addItem() {
     }
       updateList();
   }
-    itemList.innerHTML = ""; //tømmer inputfeltet
+    input.value = "";
     input.focus(); //hvis du trykker på knappen så gir det brukeren automatisk tilgang til å fortsette å skrive i inputfeltet
 }
 
@@ -39,5 +39,10 @@ function updateList() {
         li.appendChild(deleteButton);
         itemList.appendChild(li);
     });
+}
 
+function deleteItems(itemName) {
+    items = items.filter((item) => item.name !== itemName);
+
+    updateList();
 }
